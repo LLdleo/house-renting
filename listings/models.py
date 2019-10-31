@@ -1,10 +1,10 @@
 from django.db import models
 from datetime import datetime
-from realtors.models import Realtor
+from managers.models import Manager
 
 
 class Listing(models.Model):
-    realtor = models.ForeignKey(Realtor, on_delete=models.DO_NOTHING)
+    manager = models.ForeignKey(Manager, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)

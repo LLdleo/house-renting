@@ -40,6 +40,7 @@ def register(request):
     else:
         return render(request, 'accounts/register.html')
 
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']

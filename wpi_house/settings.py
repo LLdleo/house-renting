@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import json
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,7 +34,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'listings.apps.ListingsConfig',
-    'realtors.apps.RealtorsConfig',
+    'managers.apps.ManagersConfig',
     'accounts.apps.AccountsConfig',
     'contacts.apps.ContactsConfig',
     'django.contrib.admin',
@@ -78,17 +79,10 @@ WSGI_APPLICATION = 'wpi_house.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+with open(os.path.join(BASE_DIR, 'wpi_house/db.json'), 'r') as f:
+    data = json.load(f)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'wpirentals',
-        'USER': 'root',
-        'PASSWORD': '0212',
-        'HOST': 'localhost',
-        
-    }
-}
+DATABASES = data
 
 
 # Password validation

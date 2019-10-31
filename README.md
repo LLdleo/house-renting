@@ -7,3 +7,6 @@
 pip install django mysqlclient pymysql pillow
 ```
 ---
+### DB setting
+go to wpi_house/  
+change db.json

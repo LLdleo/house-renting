@@ -12,7 +12,7 @@ def contact(request):
     phone = request.POST['phone']
     message = request.POST['message']
     user_id = request.POST['user_id']
-    realtor_email = request.POST['realtor_email']
+    manager_email = request.POST['manager_email']
 
     #  Check if user has made inquiry already
     if request.user.is_authenticated:
@@ -31,9 +31,9 @@ def contact(request):
     #   'Property Listing Inquiry',
     #   'There has been an inquiry for ' + listing + '. Sign into the admin panel for more info',
     #   'traversy.brad@gmail.com',
-    #   [realtor_email, 'techguyinfo@gmail.com'],
+    #   [manager_email, 'techguyinfo@gmail.com'],
     #   fail_silently=False
     # )
 
-    messages.success(request, 'Your request has been submitted, a realtor will get back to you soon')
+    messages.success(request, 'Your request has been submitted, a manager will get back to you soon')
     return redirect('/listings/'+listing_id)
