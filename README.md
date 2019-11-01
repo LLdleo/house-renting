@@ -10,3 +10,9 @@ pip install django mysqlclient pymysql pillow
 ### DB setting
 go to wpi_house/  
 change db.json
+---
+### Before Launching the Application
+run migrate:  
+```shell script
+python manage.py migrate
+```
