@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import json
-from _socket import gethostname, gethostbyname
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
@@ -28,8 +27,7 @@ SECRET_KEY = '9(y=i5u&l#sf#@u+cbrrez27dm8b0r-g0fa(_kkdls$z6xvbp0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', gethostname(), gethostbyname(gethostname())]
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.155.90.50']  # add server IP
 
 # Application definition
 
@@ -123,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATIC_URL = '/static/'
+STATIC_URL = STATIC_ROOT  # still has problems
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'templates/static')
 ]
