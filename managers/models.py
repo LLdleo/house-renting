@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.contrib.auth.models import User
 
 
 class Manager(models.Model):
@@ -10,6 +11,7 @@ class Manager(models.Model):
     email = models.CharField(max_length=50)
     is_mvp = models.BooleanField(default=False)
     hire_date = models.DateTimeField(default=datetime.now, blank=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
 
     def __str__(self):
         return self.name

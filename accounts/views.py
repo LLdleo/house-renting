@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from contacts.models import Contact
+from .models import Profile
 
 
 def register(request):
@@ -13,6 +14,11 @@ def register(request):
         email = request.POST['email']
         password = request.POST['password']
         password2 = request.POST['password2']
+        dateOfBirth = request.POST['dateOfBirth']
+        phoneNumber = request.POST['phoneNumber']
+        faculty = request.POST['faculty']
+        academicYear = request.POST['academicYear']
+        gender = request.POST['gender']
 
         # Check if passwords match
         if password == password2:
@@ -27,11 +33,13 @@ def register(request):
                 else:
                     # Looks good
                     user = User.objects.create_user(username=username, password=password,email=email, first_name=first_name, last_name=last_name)
-                    # Login after register
+                    profile = Profile(user=user, dateOfBirth=dateOfBirth, phoneNumber=phoneNumber, faculty=faculty,
+                                      academicYear=academicYear, gender=gender)
+                    profile.save()
+                # Login after register
                     # auth.login(request, user)
                     # messages.success(request, 'You are now logged in')
                     # return redirect('index')
-                    user.save()
                     messages.success(request, 'You are now registered and can log in')
                     return redirect('login')
         else:
