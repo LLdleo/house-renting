@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from contacts.models import Contact
+from contracts.models import Contract
 from .models import Profile
+from managers.models import Manager
 
 
 def register(request):
@@ -60,6 +62,12 @@ def login(request):
             auth.login(request, user)
             messages.success(request, 'You are now logged in')
             return redirect('dashboard')
+            # a = User.objects.filter(username=username, is_staff='1')
+            # print(len(a))
+            # if len(a) == 1:
+            #     return redirect('manager_board')
+            # else:
+            #     return redirect('dashboard')
         else:
             messages.error(request, 'Invalid credentials')
             return redirect('login')
@@ -75,9 +83,22 @@ def logout(request):
 
 
 def dashboard(request):
+    a = User.objects.filter(id=request.user.id, is_staff='1')
     user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
-
-    context = {
-        'contacts': user_contacts
-    }
-    return render(request, 'accounts/dashboard.html', context)
+    if len(a) != 1:
+        contracts = Contract.objects.filter(user_id=request.user.id).order_by('-start_date')
+        context = {
+            'contacts': user_contacts,
+            'contracts': contracts
+        }
+        return render(request, 'accounts/dashboard.html', context)
+    else:
+        manager_id = Manager.objects.get(user_id=request.user.id)
+        manager_contacts = Contact.objects.order_by('contact_date').filter(manager_id=manager_id)
+        contracts = Contract.objects.filter(manager_id=manager_id).order_by('-id')
+        context = {
+            'contacts': user_contacts,
+            'manager_contacts': manager_contacts,
+            'contracts': contracts
+        }
+        return render(request, 'accounts/manager_board.html', context)

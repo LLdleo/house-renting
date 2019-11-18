@@ -38,9 +38,10 @@
 
   <section id="dashboard" class="py-4">
     <div class="container">
-        <h2>Welcome {{ user.first_name }}</h2>
+    <h2>Welcome {{ user.first_name }}</h2>
       <div class="row">
         <div class="col-md-12">
+
           {% if contacts %}
             <p>Here are the property listings that you have inquired about</p>
             <table class="table">
@@ -80,47 +81,84 @@
         </div>
       </div>
 
-    <div class="row">
+      <div class="row">
         <div class="col-md-12">
-          {% if contacts %}
-            <p>Here are the property listings that you have inquired about</p>
+            {% if manager_contacts %}
+            <p>You got some inquiries of theses properties</p>
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Property</th>
-                  <th scope="col">Replied</th>
-                  <th scope="col">Closed</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {% for contact in contacts %}
+                {% for contact in manager_contacts %}
                   <tr>
                     <td>{{ contact.id }}</td>
                     <td>{{ contact.listing }}</td>
-                    <td>{% if contact.replied %} Yes {% else %} No {% endif %}</td>
-                    <td>{% if contact.closed %} Yes {% else %} No {% endif %}</td>
                     <td>
-                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
-                    </td>
-                    <td>
-                      <a type="button" class="btn btn-warning" title="Reply:"
-                        data-container="body" data-toggle="popover" data-placement="right"
-                        data-content="{{contact.reply_message}}">
-                          Reply Message
-                        </a>
+                      <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#inquiryModal" name="contact" value="{{ contact }}">View the Inquiry</button>
                     </td>
                   </tr>
                 {% endfor %}
               </tbody>
             </table>
           {% else %}
-            <p>You have not made any inquiries</p>
+            <p>You have not got any inquiries</p>
           {% endif %}
         </div>
       </div>
-
     </div>
   </section>
+
+  <!-- Inquiry Modal -->
+  <div class="modal fade" id="inquiryModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inquiryModalLabel">View An Inquiry</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'contract_create' %}" method="POST">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+              <input type="hidden" name="user_id" value={{contact}}>
+            {% else %}
+              <input type="hidden" name="user_id" value="0">
+            {% endif %}
+            <input type="hidden" name="manager_id" value="{{ listing.manager_id }}">
+            <input type="hidden" name="listing_id" value="{{ listing.id }}">
+            <div class="form-group">
+              <label for="property_name" class="col-form-label">Property:</label>
+              <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-form-label">Name:</label>
+              <input type="text" name="name" class="form-control" {% if user.is_authenticated %} value="{{ contact}}" {% endif %} required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="col-form-label">Email:</label>
+              <input type="email" name="email" class="form-control" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+            </div>
+            <div class="form-group">
+              <label for="phone" class="col-form-label">Phone:</label>
+              <input type="text" name="phone" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="message" class="col-form-label">Message:</label>
+              <textarea name="message" class="form-control"></textarea>
+            </div>
+            <hr>
+            <input type="submit" value="Send" class="btn btn-block btn-secondary">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   {% endblock %}

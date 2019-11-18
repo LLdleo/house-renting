@@ -13,6 +13,9 @@ class Contact(models.Model):
     contact_date = models.DateTimeField(default=datetime.now, blank=True)
     user_id = models.IntegerField(blank=True)
     manager = models.ForeignKey(Manager, on_delete=models.DO_NOTHING)
+    replied = models.BooleanField(default=False)
+    reply_message = models.TextField(blank=True)
+    closed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

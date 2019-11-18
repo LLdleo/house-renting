@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'managers.apps.ManagersConfig',
     'accounts.apps.AccountsConfig',
     'contacts.apps.ContactsConfig',
+    'contracts.apps.ContractsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
