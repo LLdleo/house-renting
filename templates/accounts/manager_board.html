@@ -68,7 +68,7 @@
                       <a type="button" class="btn btn-warning" title="Reply:"
                         data-container="body" data-toggle="popover" data-placement="right"
                         data-content="{{contact.reply_message}}">
-                          Reply Message
+                          View Reply
                         </a>
                     </td>
                   </tr>
@@ -84,6 +84,7 @@
       <div class="row">
         <div class="col-md-12">
             {% if manager_contacts %}
+                <hr style="border-width:2px;border-color:darkred;"/>
             <p>You got some inquiries of theses properties</p>
             <table class="table">
               <thead>
@@ -99,7 +100,7 @@
                     <td>{{ contact.id }}</td>
                     <td>{{ contact.listing }}</td>
                     <td>
-                      <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#inquiryModal" name="contact" value="{{ contact }}">View the Inquiry</button>
+                      <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#inquiryModal" name="contact" value="{{ contact.id }}">View the Inquiry</button>
                     </td>
                   </tr>
                 {% endfor %}
@@ -110,6 +111,47 @@
           {% endif %}
         </div>
       </div>
+
+     <div class="row">
+        <div class="col-md-12">
+            <hr style="border-width:2px;border-color:darkred;"/>
+          {% if contacts %}
+            <p>Here are the contracts under your management</p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Property</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col"></th>
+                  <th scope="col">Valid</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for contract in contracts %}
+                  <tr>
+                    <td>{{ contract.id }}</td>
+                    <td>{{ contract.listing.title }}</td>
+                    <td>{{ contract.start_date }}</td>
+                    <td>{{ contract.end_date }}</td>
+                    <td>{{ contract.user.user.first_name }}</td>
+                    <td>
+                      <a class="btn btn-light" href="{% url 'listing' contract.listing_id %}">View the House </a>
+                    </td>
+                    <td>{% if contract.valid %} Yes {% else %} No {% endif %}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p>You do not have any contracts</p>
+          {% endif %}
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -127,7 +169,7 @@
           <form action="{% url 'contract_create' %}" method="POST">
             {% csrf_token %}
             {% if user.is_authenticated %}
-              <input type="hidden" name="user_id" value={{contact}}>
+              <input type="hidden" name="user_id" value={{contacts.filter}}>
             {% else %}
               <input type="hidden" name="user_id" value="0">
             {% endif %}

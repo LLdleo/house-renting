@@ -67,7 +67,7 @@
                       <a type="button" class="btn btn-warning" title="Reply:"
                         data-container="body" data-toggle="popover" data-placement="right"
                         data-content="{{contact.reply_message}}">
-                          Reply Message
+                          View Reply
                         </a>
                     </td>
                   </tr>
@@ -83,40 +83,38 @@
     <div class="row">
         <div class="col-md-12">
           {% if contacts %}
-            <p>Here are the property listings that you have inquired about</p>
+            <p>Here are your contracts</p>
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Property</th>
-                  <th scope="col">Replied</th>
-                  <th scope="col">Closed</th>
+                  <th scope="col">Start Date</th>
+                  <th scope="col">End Date</th>
+                  <th scope="col">Manager Name</th>
+                  <th scope="col"></th>
+                  <th scope="col">Valid</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                {% for contact in contacts %}
+                {% for contract in contracts %}
                   <tr>
-                    <td>{{ contact.id }}</td>
-                    <td>{{ contact.listing }}</td>
-                    <td>{% if contact.replied %} Yes {% else %} No {% endif %}</td>
-                    <td>{% if contact.closed %} Yes {% else %} No {% endif %}</td>
+                    <td>{{ contract.id }}</td>
+                    <td>{{ contract.listing.title }}</td>
+                    <td>{{ contract.start_date }}</td>
+                    <td>{{ contract.end_date }}</td>
+                    <td>{{ contract.manager.name }}</td>
                     <td>
-                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                      <a class="btn btn-light" href="{% url 'listing' contract.listing_id %}">View the House </a>
                     </td>
-                    <td>
-                      <a type="button" class="btn btn-warning" title="Reply:"
-                        data-container="body" data-toggle="popover" data-placement="right"
-                        data-content="{{contact.reply_message}}">
-                          Reply Message
-                        </a>
-                    </td>
+                    <td>{% if contract.valid %} Yes {% else %} No {% endif %}</td>
                   </tr>
                 {% endfor %}
               </tbody>
             </table>
           {% else %}
-            <p>You have not made any inquiries</p>
+            <p>You do not have any contracts</p>
           {% endif %}
         </div>
       </div>

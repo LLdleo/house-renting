@@ -11,3 +11,4 @@ class Contract(models.Model):
     start_date = models.DateTimeField(blank=False)
     end_date = models.DateTimeField(blank=False)
     if_signed = models.BooleanField(default=False)
+    valid = models.BooleanField(default=False)
