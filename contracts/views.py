@@ -44,7 +44,7 @@ def contract_sign(request):
         date = request.POST['sign_date']
         contract_id = request.POST['contract_id']
 
-        Contract.objects.filter(id=contract_id).update(if_signed=True, valid=True)
+        Contract.objects.filter(id=contract_id).update(if_signed=True, valid=True, sign_name=name, sign_date=date)
 
         return redirect('/accounts/dashboard')
 

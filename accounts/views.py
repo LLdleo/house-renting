@@ -18,7 +18,7 @@ def register(request):
         password2 = request.POST['password2']
         dateOfBirth = request.POST['dateOfBirth']
         phoneNumber = request.POST['phoneNumber']
-        faculty = request.POST['faculty']
+        dept = request.POST['dept']
         academicYear = request.POST['academicYear']
         gender = request.POST['gender']
 
@@ -34,8 +34,8 @@ def register(request):
                     return redirect('register')
                 else:
                     # Looks good
-                    user = User.objects.create_user(username=username, password=password,email=email, first_name=first_name, last_name=last_name)
-                    profile = Profile(user=user, dateOfBirth=dateOfBirth, phoneNumber=phoneNumber, faculty=faculty,
+                    user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name)
+                    profile = Profile(user=user, dateOfBirth=dateOfBirth, phoneNumber=phoneNumber, dept=dept,
                                       academicYear=academicYear, gender=gender)
                     profile.save()
                 # Login after register
@@ -103,3 +103,46 @@ def dashboard(request):
             'contracts1': contracts
         }
         return render(request, 'accounts/manager_board.html', context)
+
+
+def create_many(request):
+    # pass
+    password = "123456"
+
+    with open('./manager.csv') as f:
+        for line in f.readlines():
+            elements = line.split(',')
+            username = elements[-1]
+            email = elements[3]
+            first_name = elements[1]
+            last_name = elements[2]
+            dateOfBirth = '1975-08-08'
+            phoneNumber = elements[4]
+            dept = 'Graduate Housing'
+            academicYear = '2019'
+            gender = 'male'
+            user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name,
+                                            last_name=last_name, is_staff=True)
+            profile = Profile(user=user, dateOfBirth=dateOfBirth, phoneNumber=phoneNumber, dept=dept,
+                              academicYear=academicYear, gender=gender)
+            profile.save()
+
+    with open('./student.csv') as f:
+        for line in f.readlines():
+            elements = line.split(',')
+            username = elements[-1]
+            email = elements[4]
+            first_name = elements[1]
+            last_name = elements[2]
+            dateOfBirth = elements[3]
+            phoneNumber = elements[5]
+            dept = elements[6]
+            academicYear = elements[7]
+            gender = elements[8]
+            user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name,
+                                            last_name=last_name)
+            profile = Profile(user=user, dateOfBirth=dateOfBirth, phoneNumber=phoneNumber, dept=dept,
+                              academicYear=academicYear, gender=gender)
+            profile.save()
+
+    return redirect('index')

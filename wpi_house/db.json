@@ -2,8 +2,8 @@
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "wpirentals",
-        "USER": "root",
-        "PASSWORD": "0212",
-        "HOST": "localhost"
+        "USER": "min",
+        "PASSWORD": "MinHuang",
+        "HOST": "192.155.90.50"
     }
 }

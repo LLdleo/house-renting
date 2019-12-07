@@ -99,7 +99,21 @@
 				You understand that you are responsible for the care and safety of your own personal property and that WPI will not be responsible for the loss of your (or your guest’s) money, valuables or other personal property, including, but not limited to, by theft, fire, or other casualty, whether such losses occur in your room, storage rooms, public areas, or elsewhere in the Residence or Dining Hall Facilities. You understand that WPI encourages you to purchase insurance to cover loss or damage to your personal property or extending parental/guardian homeowners’ insurance for this purpose. <b>WPI ASSUMES NO RESPONSIBILITY FOR LOSS OR DAMAGE TO YOUR (OR YOUR GUEST’S) PERSONAL PROPERTY, NOR IS WPI RESPONSIBLE FOR PROPERTY LEFT IN RESIDENCE OR DINING HALL FACILITIES DURING VACATION PERIODS OR AFTER TERMINATION OF OCCUPANCY</b>.  You AGREE TO indemnify and hold WPI harmless from any and all liability for any such injury OR DAMAGE to person or property.
 			</p>
 			</div>
-			<div class="col-md-4" style="margin-top:50px;">
+        {% if contract.if_signed %}
+            <div class="col-md-4" style="margin-top:50px;">
+              <input type="hidden" name="contract_id" id="listing_id" value="{{ contract.id }}">
+				<div class="form-group">
+				  <label for="name" class="col-form-label">Name:</label>
+				  <input type="text" name="name" id="name" class="form-control" value="{{ contract.sign_name }}" readonly="readonly" required>
+				</div>
+				<div class="form-group">
+				  <label for="sign_date" class="col-form-label">Date:</label>
+				  <input type="text" name="sign_date" id="sign_date" class="form-control" value="{{ contract.sign_date }}" readonly="readonly" required>
+				</div>
+				<input type="submit" value="Sign" class="btn btn-default btn-lg" disabled="disabled">
+			</div>
+        {% else %}
+            <div class="col-md-4" style="margin-top:50px;">
 			  <form action="{% url 'contract_sign' %}" method="POST">
 				{% csrf_token %}
 				{% if user.is_authenticated %}
@@ -115,10 +129,12 @@
 				<div class="form-group">
 				  <label for="sign_date" class="col-form-label">Date:</label>
 				  <input type="date" name="sign_date" id="sign_date" class="form-control" required>
-				</div>				
+				</div>
 				<input type="submit" value="Sign" class="btn btn-block btn-secondary">
 			  </form>
 			</div>
+        {% endif %}
+
         </div>
        </div>
     </div>
