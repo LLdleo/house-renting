@@ -5,6 +5,7 @@
 {% block title %} | {{ listing.title }} {% endblock %}
 
 {% block content %}
+<!-- Heading Block -->
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
@@ -154,7 +155,13 @@
               <h6 class="text-secondary">{{ listing.manager }}</h6>
             </div>
           </div>
-          <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
+        <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
+{#        {% csrf_token %}#}
+{#        {% if user.is_stuff %}#}
+{#            <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#contractModal">Offer A Contract</button>#}
+{#        {% else %}#}
+{#            <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>#}
+{#        {% endif %}#}
         </div>
       </div>
     </div>

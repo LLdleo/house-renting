@@ -5,10 +5,12 @@
 {% block title %} | {{ listing.title }} {% endblock %}
 
 {% block content %}
+<!-- Heading Block -->
 <section id="showcase-inner" class="py-5 text-white">
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
+		  <h1 class="display-4">Contract</h1>
           <h1 class="display-4">{{ listing.title }}</h1>
           <p class="lead">
             <i class="fas fa-map-marker"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
@@ -26,186 +28,99 @@
             <a href="{% url 'index' %}">Home</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="{% url 'listings' %}">Listings</a>
+{#            <a href="{% url 'contract' %}">Contract</a>#}
           </li>
           <li class="breadcrumb-item active">{{ listing.title }}</li>
         </ol>
       </nav>
     </div>
   </section>
-
+  <!-- Breadcrumb -->
+  
   <!-- Alerts -->
   {% include 'partials/_alerts.html' %}
 
-  <!-- Listing -->
-  <section id="listing" class="py-4">
+  <!-- Contract Details -->
+  <section id="contract" class="py-4">
     <div class="container">
-      <a href="{% url 'listings' %}" class="btn btn-light mb-4">Back To Listings</a>
       <div class="row">
-        <div class="col-md-9">
-          <!-- Home Main Image -->
-          <img src="{{ listing.photo_main.url }}" alt="" class="img-main img-fluid mb-3">
-          <!-- Thumbnails -->
-          <div class="row mb-5 thumbs">
-            {% if listing.photo_1 %}
-            <div class="col-md-2">
-              <a href="{{ listing.photo_1.url }}" data-lightbox="home-images">
-                <img src="{{ listing.photo_1.url }}" alt="" class="img-fluid">
-              </a>
-            </div>
-            {% endif %}
-            {% if listing.photo_2 %}
-            <div class="col-md-2">
-              <a href="{{ listing.photo_2.url }}" data-lightbox="home-images">
-                <img src="{{ listing.photo_2.url }}" alt="" class="img-fluid">
-              </a>
-            </div>
-            {% endif %}
-            {% if listing.photo_3 %}
-            <div class="col-md-2">
-              <a href="{{ listing.photo_3.url }}" data-lightbox="home-images">
-                <img src="{{ listing.photo_3.url }}" alt="" class="img-fluid">
-              </a>
-            </div>
-            {% endif %}
-            {% if listing.photo_4 %}
-            <div class="col-md-2">
-              <a href="{{ listing.photo_4.url }}" data-lightbox="home-images">
-                <img src="{{ listing.photo_4.url }}" alt="" class="img-fluid">
-              </a>
-            </div>
-            {% endif %}
-            {% if listing.photo_5 %}
-            <div class="col-md-2">
-              <a href="{{ listing.photo_5.url }}" data-lightbox="home-images">
-                <img src="{{ listing.photo_5.url }}" alt="" class="img-fluid">
-              </a>
-            </div>
-            {% endif %}
-            {% if listing.photo_6 %}
-            <div class="col-md-2">
-              <a href="{{ listing.photo_6.url }}" data-lightbox="home-images">
-                <img src="{{ listing.photo_6.url }}" alt="" class="img-fluid">
-              </a>
-            </div>
-            {% endif %}
-          </div>
-          <!-- Fields -->
-          <div class="row mb-5 fields">
-            <div class="col-md-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-money-bill-alt"></i> Asking Price:
-                  <span class="float-right">${{ listing.price | intcomma }}</span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-bed"></i> Rooms:
-                  <span class="float-right">{{ listing.bedrooms }}</span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-bath"></i> Bathrooms:
-                  <span class="float-right">{{ listing.bathrooms }}</span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-car"></i> Garage:
-                  <span class="float-right">{{ listing.garage }}
-                  </span>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-th-large"></i> Square Feet:
-                  <span class="float-right">{{ listing.sqft }}</span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-square"></i> Lot Size:
-                  <span class="float-right">{{ listing.lot_size }} Acres
-                  </span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-calendar"></i> Listing Date:
-                  <span class="float-right">{{ listing.list_date }}</span>
-                </li>
-                <li class="list-group-item text-secondary">
-                  <i class="fas fa-bed"></i> Manager:
-                  <span class="float-right">{{ listing.manager }}
-                  </span>
-                </li>
+        <div class="col-md-12">
+			<div Style = "max-height: 400px; overflow-y: scroll; border-style: solid; border-width: 1px;"><p style="padding: 10px"> 
+				<b>HOUSING & DINING CONTRACT</b><br/><br/>
+				These terms and conditions apply to this Housing and Dining Services Contract (the “Contract”) made by and between Worcester Polytechnic Institute (“WPI”) by and through its Residential Services Office (“Residential Services”) and Dining Services Office (“Dining Services”), and the student signing this contract (“You” or “Your”).<br/><br/>
 
+				You are expected to abide by the following Terms and Conditions and by all WPI policies, including the Student Code of Conduct. Noncompliance with WPI policies may result in disciplinary action.  All policies and procedures outlined herein apply to students living in WPI housing (“Residence Hall Facility(ies)”) and/or using WPI dining halls (“Dining Hall Facility(ies)”).<br/><br/>
 
-              </ul>
-            </div>
-          </div>
+				This is a legally binding contract.  WPI reserves the right to pursue all legal and equitable remedies to enforce these Contract terms.  You may not unilaterally terminate this Contract. If you have questions or concerns regarding this Contract please contact the Residential Services Office.<br/><br/>
 
-          <!-- Description -->
-          <div class="row mb-5">
-            <div class="col-md-12">
-                {{ listing.description }}
-            </div>
-          </div>
+				<b>TERM AND TERMINATION</b><br/><br/>
+				Depending on the enrollment period, this Contract remains in effect for one academic year (August-May) and/or summer (May-August) as long as you are enrolled at WPI and live in a Residence Hall Facility (the “Term”).
+				Residential Services may immediately terminate this Contract if you represent a threat to the health or safety of anyone, including without limitation: WPI students, employees or other members of the WPI community.  Residential Services may terminate this Contract at any time prior to the end of the Term in the event that: (1) you violate any term or condition of this Contract; or (2) you graduate, or are dismissed, suspended, or withdrawal from WPI.  In the event Residential Services terminates this Contract for the reasons stated, you will remain financially obligated for the balance of the Term.  WPI’s refund policy is available on the Bursar’s Office website.<br/><br/>
+				
+				<b>YOUR FINANCIAL OBLIGATIONS</b><br/><br/>
+				You agree to pay the applicable rate for housing and dining services as set forth herein. 
+				Housing: After you sign this Contract, you will become financially obligated for the cost of your housing at WPI when you (or your designee) select a housing location or when you are assigned housing by a WPI Residential Services staff member. You are financially obligated to pay for your housing even if you choose not to reside in the Residence Hall Facility.<br/><br/>
+				
+				Dining Meal Plan: You become financially obligated for the cost of your meal plan when you (or your designee) select a meal plan or when you are assigned a meal plan by a WPI staff member. You are financially obligated to pay for your meal plan even if you choose not to use it.<br/><br/>
+				
+				<b>DINING SERVICES TERMS AND CONDITIONS</b><br/><br/>
+				If you are a resident of any of the following Residence Hall Facilities, you are obligated to purchase a meal plan: Morgan, Daniels, Sanford Riley, Stoddard, Trowbridge House, Institute, and Founders.
+				You may only change your meal plan selection during the first two weeks of “A” and “C” terms.
+				If you require a special diet for health reasons, you must submit a written copy of the requested diet to WPI’s Office of Disability Services, who will work with Dining Services regarding your request. Should Dining Services not be able to make an accommodation, you may request a release from this Contract as it relates to dining and/or housing, if necessary.<br/><br/>
+				
+				<b>RESIDENTIAL SERVICES TERMS AND CONDITIONS</b><br/><br/>
+				Full-Time Student; Changes to Assignment:  You must be a full-time WPI student to be an occupant of a Residence Hall Facility. You must vacate your Residence Hall Facility if you are no longer full-time status or upon termination of your student status. Residential Services reserves the right to change your housing assignment at any time.  Residential Services may choose to terminate your housing assignment if you have not occupied the space or you have not advised Residential Services of your delayed arrival.<br/><br/>
+				
+				Room Changes:  You will not be permitted to change your housing assignment during the first two weeks of terms A, C, and E, and the last two weeks of terms B, D, and E. If you desire to change your housing assignment you must follow the proper room change procedures as per the Residential Services Office.  You are otherwise prohibited from changing your housing assignment.<br/><br/>
+				
+				Vacancies:  Vacant spaces within a Residence Hall Facility must remain set up/available to accommodate another student. Residential Services reserves the right to assign another student to a vacant space at any time without your prior approval.<br/><br/>
+				
+				Keys and IDs:  You will be issued a key for your assigned room.  You are prohibited from: (i) loaning your WPI key(s) and ID(s) to anyone at any time; and (ii) duplicating your key(s) or ID(s).  You must return your key(s) or ID(s) to Residential Services when you move out of your Residence Hall Facility.  If you lose your key(s) or ID(s), you must immediately notify Residential Services and WPI will charge your student account a three hundred dollar ($300) fee for a lock change if you live in Founders Hall, East Hall, or Faraday Hall; WPI will charge your student account a seventy-five dollar ($75) charge in all other Residence Hall Facilities. You must present your WPI ID card to WPI staff or any authorized campus authority upon request. You must cooperate with WPI staff members acting in accordance with their duties.<br/><br/>
+				
+				Vacating Your Space: Whenever you vacate your Residence Hall Facility for any reason, you must notify Residential Services and vacate your space within the timeframe allotted by Residential Services. Should you fail to vacate your space and/or notify Residential Services, you will incur daily housing charges until the situation is resolved.  Residence Hall Facilities are not considered vacated until all of your personal possessions are removed and your key has been returned to Residential Services. WPI reserves the right to remove your belongings or charge you for occupancy beyond the date of withdrawal/departure if you leave behind personal possessions.<br/><br/>
+				Guests: Your housing assignment within a Residence Hall Facility is a private space and you are required to share it with your roommates. You may not engage in any activity that would deny your roommate(s) access to the space, or make them feel uncomfortable while in the space. You agree that: (i) you must obtain the consent of your other roommates before any guest stays in your room; (ii) you may not have overnight guests for more than three (3) nights per month without permission from your roommates; (iii) you are responsible for explaining all WPI policies to your guests; and (iv) you will be held accountable for the actions of your guest. Students requiring a Personal Care Attendant (PCA) that will have access to their on campus residence must comply with the PCA Policy as set forth by the Office of Disability Services.<br/><br/>
+				
+				Care and Use of Facilities: WPI requires proper care and use of Residence Hall Facilities at all times. You are responsible for keeping your room and its contents in good order and free from damage.  Residential Services reserves the right to grant WPI staff members or authorized agents permission to enter your room for the purpose of assessing and repairing the physical facilities and to ensure the maintenance of appropriate health and safety standards, which may include policy violations. You must notify your Resident Advisor/ Graduate Housing Assistant of any maintenance requests. You are not permitted to relocate common area (e.g., lounges, dining halls, and other public areas) furnishings to your room for personal use.<br/><br/>
+				
+				Damage:  You are financially responsible for damage to your space and furnishings beyond normal wear and tear.  Such damage will be charged to your student account.  If you are identified as being responsible for damage, theft, or losses in common areas and exterior of the Residence Hall Facility, you will be billed for the cost of repair and/or replacement to the damaged property.  If damage occurs on a floor or in public areas of a Residence Hall Facility and it is not possible to determine the individual(s) responsible, you (and all other residents of the floor or Residence Hall Facility) will share the financial responsibility for such damage.<br/><br/>
+				
+				Health & Fire Safety:  Residential Services conducts fire drills twice per year.  You are required to follow fire evacuation procedures. Failure to evacuate is a violation of Massachusetts law and WPI policy. You are prohibited from tampering with fire safety. All fire and safety equipment in the residence hall facilities (smoke and heat detectors, sprinklers, and water pipes) must be kept clear of obstruction. You are prohibited from smoking in all Residence Hall Facilities.<br/><br/>
+				
+				Winter Recess: The following Residence Hall Facilities close for Winter Break: Morgan, Daniels, Sanford Riley, Stoddard, Trowbridge House, Institute, and Founders. The dates and times associated with this closure are listed annually on the WPI website. <br/><br/>
+				
+				Academic Year Closing and Summer Housing:  All Residence Hall Facilities close each academic year after the conclusion of finals in D-Term.  Please see postings for exact date and time.  You must turn in your keys, and remove all of your belongings from the Residence Hall Facility by this time. If you fail to turn in a key when vacating, your student account will be charged for the lock change order. Should you desire summer housing, you will be assigned to a Residence Hall Facility for the summer sessions. Residence Hall Facilities are available for occupancy based on selected dates and with authorization from Residential Services.<br/><br/>
+				
+				<b>GENERAL TERMS AND CONDITIONS</b><br/><br/>
+				Residential and Dining Services reserve the right to modify the terms of this Contract at any time, including without limitation the housing and meal plan rates.  The current rates, and any changes to them, will be published on the Bursar’s Office website. Housing and meal plan privileges are non-transferable.<br/><br/>
+				
+				You will comply with all WPI rules, policies, regulations, and procedures (“Rules”) including without limitation the Rules set forth in the Student Code of Conduct, Residential Services Policies, Animals On Campus Policy, in each case as they may be modified, amended, or replaced from time to time. Any violation of WPI Rules or this Contract may result in the termination, suspension and/or limitation of your occupancy rights and/or other disciplinary action and sanctions in accordance with the WPI’s established procedures. <br/><br/>
+				
+				<b>LIMITATION OF LIABILITY & INDEMNIFICATION</b><br/><br/>
+				You understand that you are responsible for the care and safety of your own personal property and that WPI will not be responsible for the loss of your (or your guest’s) money, valuables or other personal property, including, but not limited to, by theft, fire, or other casualty, whether such losses occur in your room, storage rooms, public areas, or elsewhere in the Residence or Dining Hall Facilities. You understand that WPI encourages you to purchase insurance to cover loss or damage to your personal property or extending parental/guardian homeowners’ insurance for this purpose. <b>WPI ASSUMES NO RESPONSIBILITY FOR LOSS OR DAMAGE TO YOUR (OR YOUR GUEST’S) PERSONAL PROPERTY, NOR IS WPI RESPONSIBLE FOR PROPERTY LEFT IN RESIDENCE OR DINING HALL FACILITIES DURING VACATION PERIODS OR AFTER TERMINATION OF OCCUPANCY</b>.  You AGREE TO indemnify and hold WPI harmless from any and all liability for any such injury OR DAMAGE to person or property.
+			</p>
+			</div>
+			<div class="col-md-4" style="margin-top:50px;">
+			  <form action="{% url 'contract_sign' %}" method="POST">
+				{% csrf_token %}
+				{% if user.is_authenticated %}
+				  <input type="hidden" name="user_id" value="{{ user.id }}">
+				{% else %}
+				  <input type="hidden" name="user_id" value="0">
+				{% endif %}
+              <input type="hidden" name="contract_id" id="listing_id" value="{{ contract.id }}">
+				<div class="form-group">
+				  <label for="name" class="col-form-label">Name:</label>
+				  <input type="text" name="name" id="name" class="form-control" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
+				</div>
+				<div class="form-group">
+				  <label for="sign_date" class="col-form-label">Date:</label>
+				  <input type="date" name="sign_date" id="sign_date" class="form-control" required>
+				</div>				
+				<input type="submit" value="Sign" class="btn btn-block btn-secondary">
+			  </form>
+			</div>
         </div>
-        <div class="col-md-3">
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{ listing.manager.photo.url }}" alt="">
-            <div class="card-body">
-              <h5 class="card-title">Property Manager</h5>
-              <h6 class="text-secondary">{{ listing.manager }}</h6>
-            </div>
-          </div>
-          <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
-        </div>
-      </div>
+       </div>
     </div>
   </section>
-
-  <!-- Inquiry Modal -->
-  <div class="modal fade" id="inquiryModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="inquiryModalLabel">Make An Inquiry</h5>
-          <button type="button" class="close" data-dismiss="modal">
-            <span>&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="{% url 'contact' %}" method="POST">
-            {% csrf_token %}
-            {% if user.is_authenticated %}
-              <input type="hidden" name="user_id" value="{{ user.id }}">
-            {% else %}
-              <input type="hidden" name="user_id" value="0">
-            {% endif %}
-            <input type="hidden" name="manager_email" value="{{ listing.manager.email }}">
-            <input type="hidden" name="manager_id" value="{{ listing.manager_id }}">
-            <input type="hidden" name="listing_id" value="{{ listing.id }}">
-            <div class="form-group">
-              <label for="property_name" class="col-form-label">Property:</label>
-              <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
-            </div>
-            <div class="form-group">
-              <label for="name" class="col-form-label">Name:</label>
-              <input type="text" name="name" class="form-control" {% if user.is_authenticated %} value="{{ user.first_name }} {{ user.last_name }}" {% endif %} required>
-            </div>
-            <div class="form-group">
-              <label for="email" class="col-form-label">Email:</label>
-              <input type="email" name="email" class="form-control" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
-            </div>
-            <div class="form-group">
-              <label for="phone" class="col-form-label">Phone:</label>
-              <input type="text" name="phone" class="form-control">
-            </div>
-            <div class="form-group">
-              <label for="message" class="col-form-label">Message:</label>
-              <textarea name="message" class="form-control"></textarea>
-            </div>
-            <hr>
-            <input type="submit" value="Send" class="btn btn-block btn-secondary">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 {% endblock %}

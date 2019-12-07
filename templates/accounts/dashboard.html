@@ -61,7 +61,7 @@
                     <td>{% if contact.replied %} Yes {% else %} No {% endif %}</td>
                     <td>{% if contact.closed %} Yes {% else %} No {% endif %}</td>
                     <td>
-                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
+                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View the House</a>
                     </td>
                     <td>
                       <a type="button" class="btn btn-warning" title="Reply:"
@@ -88,11 +88,12 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Property</th>
+                  <th scope="col">House Name</th>
                   <th scope="col">Start Date</th>
                   <th scope="col">End Date</th>
                   <th scope="col">Manager Name</th>
-                  <th scope="col"></th>
+                  <th scope="col">House Info</th>
+                  <th scope="col">Contract Info</th>
                   <th scope="col">Valid</th>
                   <th></th>
                 </tr>
@@ -107,6 +108,9 @@
                     <td>{{ contract.manager.name }}</td>
                     <td>
                       <a class="btn btn-light" href="{% url 'listing' contract.listing_id %}">View the House </a>
+                    </td>
+                    <td>
+                      <a class="btn btn-light" href="{% url 'contract' contract.id %}">View the Contract </a>
                     </td>
                     <td>{% if contract.valid %} Yes {% else %} No {% endif %}</td>
                   </tr>

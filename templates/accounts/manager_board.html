@@ -99,8 +99,12 @@
                   <tr>
                     <td>{{ contact.id }}</td>
                     <td>{{ contact.listing }}</td>
+                    <td>{{ contact.name }}</td>
                     <td>
-                      <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#inquiryModal" name="contact" value="{{ contact.id }}">View the Inquiry</button>
+                      <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#viewModal" name="contact" onclick="setUserID('{{ contact.user_id }}'); setManagerID('{{ contact.manager_id }}'); setContactID({{ contact.id }}); setProperty('{{ contact.listing }}'); setPropertyID('{{ contact.listing_id }}'); setUserName('{{ contact.name }}'); setEmail('{{ contact.email }}'); setPhone('{{contact.phone}}'); setMessage('{{ contact.message }}');">View the Inquiry</button>
+                    </td>
+                    <td>
+                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View the House </a>
                     </td>
                   </tr>
                 {% endfor %}
@@ -115,7 +119,7 @@
      <div class="row">
         <div class="col-md-12">
             <hr style="border-width:2px;border-color:darkred;"/>
-          {% if contacts %}
+          {% if contracts %}
             <p>Here are the contracts under your management</p>
             <table class="table">
               <thead>
@@ -156,11 +160,11 @@
   </section>
 
   <!-- Inquiry Modal -->
-  <div class="modal fade" id="inquiryModal" role="dialog">
+  <div class="modal fade" id="viewModal" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="inquiryModalLabel">View An Inquiry</h5>
+          <h5 class="modal-title" id="viewModalLabel">View the Inquiry</h5>
           <button type="button" class="close" data-dismiss="modal">
             <span>&times;</span>
           </button>
@@ -169,38 +173,95 @@
           <form action="{% url 'contract_create' %}" method="POST">
             {% csrf_token %}
             {% if user.is_authenticated %}
-              <input type="hidden" name="user_id" value={{contacts.filter}}>
+              <input type="hidden" name="manager_id" id="manager_id">
             {% else %}
-              <input type="hidden" name="user_id" value="0">
+              <input type="hidden" name="manager_id" value="0">
             {% endif %}
-            <input type="hidden" name="manager_id" value="{{ listing.manager_id }}">
-            <input type="hidden" name="listing_id" value="{{ listing.id }}">
-            <div class="form-group">
+            <input type="hidden" name="the_user_id" id="the_user_id">
+            <input type="hidden" name="contact_id" id="contact_id">
+            <input type="hidden" name="listing_id" id="listing_id">
+          <div class="row">
+          <div class="col-sm">
               <label for="property_name" class="col-form-label">Property:</label>
-              <input type="text" name="listing" class="form-control" value="{{ listing.title }}">
+              <input type="text" name="property_name" class="form-control" id="property_name" readonly="readonly">
             </div>
-            <div class="form-group">
-              <label for="name" class="col-form-label">Name:</label>
-              <input type="text" name="name" class="form-control" {% if user.is_authenticated %} value="{{ contact}}" {% endif %} required>
+            <div class="col-sm">
+              <label for="user_name" class="col-form-label">Name:</label>
+              <input type="text" name="user_name" class="form-control" {% if user.is_authenticated %} id="user_name" {% endif %} required readonly="readonly">
             </div>
-            <div class="form-group">
+
+          </div>
+          <div class="row">
+              <div class="col-sm">
               <label for="email" class="col-form-label">Email:</label>
-              <input type="email" name="email" class="form-control" {% if user.is_authenticated %} value="{{ user.email }}" {% endif %} required>
+              <input type="email" name="email" class="form-control" {% if user.is_authenticated %} id="email" {% endif %} required readonly="readonly">
             </div>
-            <div class="form-group">
+              <div class="col-sm">
               <label for="phone" class="col-form-label">Phone:</label>
-              <input type="text" name="phone" class="form-control">
+              <input type="text" name="phone" class="form-control" id="phone" readonly="readonly">
             </div>
+          </div>
+
             <div class="form-group">
-              <label for="message" class="col-form-label">Message:</label>
-              <textarea name="message" class="form-control"></textarea>
+              <label for="message_" class="col-form-label">Message:</label>
+                <textarea name="message" class="form-control" id="message_" readonly="readonly"></textarea>
             </div>
-            <hr>
-            <input type="submit" value="Send" class="btn btn-block btn-secondary">
+          <div class="form-group">
+              <label for="start_date" class="col-form-label">Contract Start Date:</label>
+              <input type="date" class="form-control" id="start_date" name="start_date">
+
+            </div>
+          <div class="form-group">
+              <label for="end_date" class="col-form-label">Contract End Date:</label>
+              <input type="date" class="form-control" id="end_date" name="end_date">
+            </div>
+          <div class="form-group">
+              <label for="reply_message" class="col-form-label">Reply to the Applier:</label>
+                <textarea name="reply_message" class="form-control" id="reply_message">Your inquiry is approved, please sign the contract</textarea>
+            </div>
+            <input type="submit" value="Submit" class="btn btn-block btn-secondary">
+              <hr style="border-width:2px;border-color:darkred;"/>
+          </form>
+
+          <form action="{% url 'contract_deny' %}" method="POST">
+            <div class="form-group">
+              <label for="leave_a_message" class="col-form-label">Leave a Message to the Applier:</label>
+                <textarea name="leave_a_message" class="form-control" id="leave_a_message">Your inquiry is not approved, I will contact you soon</textarea>
+            </div>
+            <input type="submit" value="Deny" class="btn btn-block btn-secondary">
           </form>
         </div>
       </div>
     </div>
   </div>
+<script type="text/javascript">
+    function setUserID(id_){
+        document.getElementById("the_user_id").value = id_;
+    }
+    function setManagerID(id_){
+        document.getElementById("manager_id").value = id_;
+    }
+    function setContactID(c_id){
+        document.getElementById("contact_id").value = c_id;
+    }
+    function setProperty(property_){
+        document.getElementById("property_name").value = property_;
+    }
+    function setPropertyID(listing_id_){
+        document.getElementById("listing_id").value = listing_id_;
+    }
+    function setUserName(name_){
+        document.getElementById("user_name").value = name_;
+    }
+    function setEmail(email_){
+        document.getElementById("email").value = email_;
+    }
+    function setPhone(phone_){
+        document.getElementById("phone").value = phone_;
+    }
+    function setMessage(message_g){
+        document.getElementById("message_").value = message_g;
+    }
+</script>
 
   {% endblock %}

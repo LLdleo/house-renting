@@ -3,6 +3,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from .choices import price_choices, room_choices, property_type
 
 from .models import Listing
+from contacts.models import Contact
 
 
 def index(request):
@@ -11,9 +12,11 @@ def index(request):
     paginator = Paginator(listings, 6)
     page = request.GET.get('page')
     paged_listings = paginator.get_page(page)
+    contact_info = Contact.objects.filter(listing_id=page)
 
     context = {
-        'listings': paged_listings
+        'listings': paged_listings,
+        'contact_info': contact_info
     }
 
     return render(request, 'listings/listings.html', context)

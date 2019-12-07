@@ -99,6 +99,7 @@ def dashboard(request):
         context = {
             'contacts': user_contacts,
             'manager_contacts': manager_contacts,
-            'contracts': contracts
+            'contracts': contracts,
+            'contracts1': contracts
         }
         return render(request, 'accounts/manager_board.html', context)
