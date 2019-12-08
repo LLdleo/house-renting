@@ -5,8 +5,6 @@ room_choices = {
 }
 
 price_choices = {
-    '500': '$500',
-    '550': '$550',
     '600': '$600',
     '650': '$650',
 }
@@ -35,5 +33,11 @@ heating_list = {
 furnished_list = {
     'Well': 'Well',
     'Normal': 'Normal',
+}
+
+floor_size_list = {
+    '1000': 1000,
+    '1500': 1500,
+    '2000': 2000,
 }
 

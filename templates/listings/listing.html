@@ -121,8 +121,8 @@
                   <span class="float-right">{{ listing.sqft }}</span>
                 </li>
                 <li class="list-group-item text-secondary">
-                  <i class="fas fa-square"></i> Lot Size:
-                  <span class="float-right">{{ listing.lot_size }} Acres
+                  <i class="fas fa-square"></i> Status:
+                  <span class="float-right"> {% if listing.current_occupied < listing.bedrooms %} Available {% else %} Full {% endif %}
                   </span>
                 </li>
                 <li class="list-group-item text-secondary">

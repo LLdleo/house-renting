@@ -16,12 +16,12 @@
        
               <div class="form-row">
                 <div class="col-md-3 mb-3">
-                  <label class="sr-only">Keywords</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Keyword" value="{{ values.keywords }}" style="width: 200px;">
+                  <label class="sr-only">Street Name</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Street Name" value="{{ values.keywords }}" style="width: 200px;">
                 </div>
 
                 <div class="col-md-3 mb-3">
-                  <label class="sr-only">State</label>
+                  <label class="sr-only">Property Type</label>
                 <select name="property_type" class="form-control" style="width:200px;">
                   <option selected="selected" disabled="disabled">Property Type</option>
                     {% for key,value in property_type.items %}
@@ -56,6 +56,19 @@
                     {% endfor %}
                   </select>
                 </div>
+              
+              <div class="col-md-3 mb-3">
+                <select name="floor_size" class="form-control" style="width:200px;">
+                  <option selected="true" disabled="disabled">Size Larger Than</option>
+                  {% for key,value in floor_size_list.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.floor_size %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
             <div class="col-md-3 mb-3">
                 <select name="energy" class="form-control" style="width:200px;">
@@ -167,7 +180,7 @@
 {#                Todo#}
                     <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-book-open"></i> Status: {% if listing.current_occupied < listing.bedrooms %} Free {% else %} Full {% endif %}</div>
+                      <i class="fas fa-book-open"></i> Status: {% if listing.current_occupied < listing.bedrooms %} Available {% else %} Full {% endif %}</div>
                     <div class="col-6">
                       <i class="fas fa-child"></i> Occupied: {{ listing.current_occupied }}</div>
                   </div>
