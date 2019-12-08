@@ -106,7 +106,7 @@
                         {% if contact.replied %}
                             <button class="btn btn-dark btn-warning" name="contact" readonly="readonly">Already Replied</button>
                         {% else %}
-                            <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#viewModal" name="contact" onclick="setUserID('{{ contact.user_id }}'); setManagerID('{{ contact.manager_id }}'); setContactID({{ contact.id }}); setProperty('{{ contact.listing }}'); setPropertyID('{{ contact.listing_id }}'); setUserName('{{ contact.name }}'); setEmail('{{ contact.email }}'); setPhone('{{contact.phone}}'); setMessage('{{ contact.message }}');">View the Inquiry</button>
+                            <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#viewModal" name="contact" onclick="setUserID('{{ contact.user_id }}'); setManagerID('{{ contact.manager_id }}'); setContactID('{{ contact.id }}'); setContactID1('{{ contact.id }}'); setProperty('{{ contact.listing }}'); setPropertyID('{{ contact.listing_id }}'); setUserName('{{ contact.name }}'); setEmail('{{ contact.email }}'); setPhone('{{contact.phone}}'); setMessage('{{ contact.message }}')">View the Inquiry</button>
                         {% endif %}
                       </td>
                     <td>
@@ -152,7 +152,7 @@
                       <a class="btn btn-light" href="{% url 'listing' contract.listing_id %}">View the House </a>
                     </td>
                     <td>{% if contract.valid %} Yes {% else %} No {% endif %}</td>
-                    <td>{% if contract.valid %} <button class="btn btn-dark btn-warning" data-toggle="modal" data-target="#endContractModal" name="endContract" onclick="setContractID('{{ contract.id }}'); setManagerID('{{ contract.manager_id }}')">End the Contract</button> {% else %} Nothing {% endif %}</td>
+                    <td>{% if contract.valid %} <button class="btn btn-dark btn-warning" data-toggle="modal" data-target="#endContractModal" name="endContract" onclick="setContractID('{{ contract.id }}'); setManagerID1('{{ contract.manager_id }}')">End the Contract</button> {% else %} Nothing {% endif %}</td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -273,23 +273,26 @@
         document.getElementById("the_user_id").value = id_;
     }
     function setManagerID(id_){
-        document.getElementById("manager_id1").value = id_;
         document.getElementById("manager_id2").value = id_;
+    }
+    function setManagerID1(id_){
+        document.getElementById("manager_id1").value = id_;
     }
     function setContactID(c_id){
         document.getElementById("contact_id").value = c_id;
+    }
+    function setContactID1(c_id){
         document.getElementById("contact_id1").value = c_id;
     }
 
     function setContractID(id_){
-        document.getElementById("contract_id").value = id_;
         document.getElementById("contract_id1").value = id_;
     }
     function setProperty(property_){
         document.getElementById("property_name").value = property_;
     }
     function setPropertyID(listing_id_){
-        document.getElementById("listing_id").value = listing_id_;
+        {#document.getElementById("listing_id").value = listing_id_;#}
         document.getElementById("listing_id1").value = listing_id_;
     }
     function setUserName(name_){
