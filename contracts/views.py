@@ -12,7 +12,7 @@ def contract_create(request):
     :return:
     """
     if request.method == 'POST':
-        listing_id = request.POST['listing_id']
+        listing_id = request.POST['listing_id1']
         user_id = request.POST['the_user_id']
         manager_id = request.POST['manager_id2']
         start_date = request.POST['start_date']

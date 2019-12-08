@@ -206,7 +206,7 @@
               <input type="hidden" name="manager_id2" id="manager_id2">
             <input type="hidden" name="the_user_id" id="the_user_id">
             <input type="hidden" name="contact_id" id="contact_id">
-            <input type="hidden" name="listing_id" id="listing_id">
+            <input type="hidden" name="listing_id1" id="listing_id1">
           <div class="row">
           <div class="col-sm">
               <label for="property_name" class="col-form-label">Property:</label>
@@ -290,6 +290,7 @@
     }
     function setPropertyID(listing_id_){
         document.getElementById("listing_id").value = listing_id_;
+        document.getElementById("listing_id1").value = listing_id_;
     }
     function setUserName(name_){
         document.getElementById("user_name").value = name_;
