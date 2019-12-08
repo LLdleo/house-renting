@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .models import Contract
 from contacts.models import Contact
+from listings.models import Listing
 
 
 def contract_create(request):
@@ -45,6 +46,11 @@ def contract_sign(request):
         contract_id = request.POST['contract_id']
 
         Contract.objects.filter(id=contract_id).update(if_signed=True, valid=True, sign_name=name, sign_date=date)
+        listing_id = Contract.objects.filter(id=contract_id).values_list('listing_id').first()[0]
+        max_capacity = int(Listing.objects.filter(id=listing_id).values_list('bedrooms').first()[0])
+        current_occupied = Contract.objects.filter(id=listing_id, valid=True).count('id')
+        if current_occupied < max_capacity:
+            Listing.objects.filter(id=listing_id).update(current_occupied=current_occupied+1)
 
         return redirect('/accounts/dashboard')
 
@@ -57,3 +63,15 @@ def contract(request, contract_id):
     }
 
     return render(request, 'contracts/contract.html', context)
+
+
+def end_contract(request):
+    if request.method == 'POST':
+        contract_id = request.POST['contract_id']
+        import datetime
+        dt = datetime.datetime.now()
+        today = '-'.join([str(dt.year), str(dt.month), str(dt.day)])
+
+        Contract.objects.filter(id=contract_id).update(valid=False, end_date=today)
+
+        return redirect('/accounts/dashboard')

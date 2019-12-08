@@ -131,9 +131,9 @@
                   <th scope="col">Start Date</th>
                   <th scope="col">End Date</th>
                   <th scope="col">Student Name</th>
-                  <th scope="col"></th>
+                  <th scope="col">House</th>
                   <th scope="col">Valid</th>
-                  <th></th>
+                  <th scope="col">Manipulate</th>
                 </tr>
               </thead>
               <tbody>
@@ -148,6 +148,7 @@
                       <a class="btn btn-light" href="{% url 'listing' contract.listing_id %}">View the House </a>
                     </td>
                     <td>{% if contract.valid %} Yes {% else %} No {% endif %}</td>
+                    <td>{% if contract.valid %} <button class="btn btn-dark btn-warning" data-toggle="modal" data-target="#endContractModal" name="endContract" onclick="setContractID('{{ contract.id }}')">End the Contract</button> {% else %} Nothing {% endif %}</td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -160,6 +161,34 @@
 
     </div>
   </section>
+
+      <!-- End Contract Modal -->
+  <div class="modal fade" id="endContractModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewModalLabel">End the Inquiry</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{% url 'end_contract' %}" method="POST">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+              <input type="hidden" name="manager_id" id="manager_id">
+            {% else %}
+              <input type="hidden" name="manager_id" value="0">
+            {% endif %}
+            <input type="hidden" name="contract_id" id="contract_id">
+          <label> Are you sure you want to end this contract?</label>
+          <label> (Note: The contract will be ended right away )</label>
+            <input type="submit" value="Deny" class="btn btn-block btn-secondary">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Inquiry Modal -->
   <div class="modal fade" id="viewModal" role="dialog">
@@ -236,6 +265,9 @@
       </div>
     </div>
   </div>
+
+
+
 <script type="text/javascript">
     function setUserID(id_){
         document.getElementById("the_user_id").value = id_;
@@ -245,6 +277,10 @@
     }
     function setContactID(c_id){
         document.getElementById("contact_id").value = c_id;
+    }
+
+    function setContractID(id_){
+        document.getElementById("contract_id").value = id_;
     }
     function setProperty(property_){
         document.getElementById("property_name").value = property_;
@@ -264,6 +300,7 @@
     function setMessage(message_g){
         document.getElementById("message_").value = message_g;
     }
+
 </script>
 
   {% endblock %}

@@ -7,7 +7,7 @@ from .models import Contact
 def contact(request):
     if request.method == 'POST':
         listing_id = request.POST['listing_id']
-        listing = request.POST['listing']
+        property_name = request.POST['property_name']
         name = request.POST['name']
         email = request.POST['email']
         phone = request.POST['phone']
@@ -21,10 +21,10 @@ def contact(request):
             user_id = request.user.id
             has_contacted = Contact.objects.filter(listing_id=listing_id, user_id=user_id, closed=False)
             if len(has_contacted) > 0:
-                messages.error(request, 'You have already made an inquiry for this listing')
+                messages.error(request, 'You have already made an inquiry for this property')
                 return redirect('/listings/'+listing_id)
 
-        contact = Contact(listing=listing, listing_id=listing_id, name=name, email=email, phone=phone, message=message, user_id=user_id, manager_id=manager_id)
+        contact = Contact(listing=property_name, listing_id=listing_id, name=name, email=email, phone=phone, message=message, user_id=user_id, manager_id=manager_id)
 
         contact.save()
 

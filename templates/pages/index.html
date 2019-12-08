@@ -100,10 +100,17 @@
                     <div class="col-6">
                       <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
                   </div>
+{#                Todo#}
+                    <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-book-open"></i> Status: {% if listing.current_occupied < listing.bedrooms %} Free {% else %} Full {% endif %}</div>
+                    <div class="col-6">
+                      <i class="fas fa-child"></i> Occupied: {{ listing.current_occupied }}</div>
+                  </div>
                   <hr>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                      <i class="fas fa-user"></i> {{ listing.manager.name }}</div>
                   </div>
                   <div class="row text-secondary pb-2">
                     <div class="col-6">
