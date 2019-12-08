@@ -14,7 +14,7 @@ def contract_create(request):
     if request.method == 'POST':
         listing_id = request.POST['listing_id']
         user_id = request.POST['the_user_id']
-        manager_id = request.POST['manager_id']
+        manager_id = request.POST['manager_id2']
         start_date = request.POST['start_date']
         end_date = request.POST['end_date']
         message = request.POST['reply_message']
