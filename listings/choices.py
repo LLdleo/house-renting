@@ -31,8 +31,8 @@ heating_list = {
 }
 
 furnished_list = {
-    'Well': 'Well',
-    'Normal': 'Normal',
+    'Furnished': 'Furnished',
+    'Unfurnished': 'Unfurnished',
 }
 
 floor_size_list = {

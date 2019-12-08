@@ -31,7 +31,7 @@ def contract_create(request):
 
 def contract_deny(request):
     if request.method == 'POST':
-        message = request.POST['message']
+        message = request.POST['leave_a_message']
         contact_id = request.POST['contact_id1']
 
         Contact.objects.filter(id=contact_id).update(replied=True, reply_message=message, closed=True)
