@@ -106,7 +106,7 @@
                         {% if contact.replied %}
                             <button class="btn btn-dark btn-warning" name="contact" readonly="readonly">Already Replied</button>
                         {% else %}
-                            <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#viewModal" name="contact" onclick="setUserID('{{ contact.user_id }}'); setManagerID2('{{ contact.manager_id }}'); setContactID({{ contact.id }}); setProperty('{{ contact.listing }}'); setPropertyID('{{ contact.listing_id }}'); setUserName('{{ contact.name }}'); setEmail('{{ contact.email }}'); setPhone('{{contact.phone}}'); setMessage('{{ contact.message }}');">View the Inquiry</button>
+                            <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#viewModal" name="contact" onclick="setUserID('{{ contact.user_id }}'); setManagerID('{{ contact.manager_id }}'); setContactID({{ contact.id }}); setProperty('{{ contact.listing }}'); setPropertyID('{{ contact.listing_id }}'); setUserName('{{ contact.name }}'); setEmail('{{ contact.email }}'); setPhone('{{contact.phone}}'); setMessage('{{ contact.message }}');">View the Inquiry</button>
                         {% endif %}
                       </td>
                     <td>
@@ -152,7 +152,7 @@
                       <a class="btn btn-light" href="{% url 'listing' contract.listing_id %}">View the House </a>
                     </td>
                     <td>{% if contract.valid %} Yes {% else %} No {% endif %}</td>
-                    <td>{% if contract.valid %} <button class="btn btn-dark btn-warning" data-toggle="modal" data-target="#endContractModal" name="endContract" onclick="setContractID('{{ contract.id }}')">End the Contract</button> {% else %} Nothing {% endif %}</td>
+                    <td>{% if contract.valid %} <button class="btn btn-dark btn-warning" data-toggle="modal" data-target="#endContractModal" name="endContract" onclick="setContractID('{{ contract.id }}'); setManagerID('{{ contract.manager_id }}')">End the Contract</button> {% else %} Nothing {% endif %}</td>
                   </tr>
                 {% endfor %}
               </tbody>
@@ -180,10 +180,10 @@
           <form action="{% url 'end_contract' %}" method="POST">
             {% csrf_token %}
             <input type="hidden" name="manager_id1" id="manager_id1">
-            <input type="hidden" name="contract_id" id="contract_id">
+            <input type="hidden" name="contract_id1" id="contract_id1">
           <label> Are you sure you want to end this contract?</label>
           <label> (Note: The contract will be ended right away )</label>
-            <input type="submit" value="Deny" class="btn btn-block btn-secondary">
+            <input type="submit" value="End Contract" class="btn btn-block btn-secondary">
           </form>
         </div>
       </div>
@@ -251,6 +251,10 @@
           </form>
 
           <form action="{% url 'contract_deny' %}" method="POST">
+
+            {% csrf_token %}
+            <input type="hidden" name="manager_id1" id="manager_id1">
+            <input type="hidden" name="contact_id1" id="contact_id1">
             <div class="form-group">
               <label for="leave_a_message" class="col-form-label">Leave a Message to the Applier:</label>
                 <textarea name="leave_a_message" class="form-control" id="leave_a_message">Your inquiry is not approved, I will contact you soon</textarea>
@@ -268,18 +272,18 @@
     function setUserID(id_){
         document.getElementById("the_user_id").value = id_;
     }
-    function setManagerID1(id_){
+    function setManagerID(id_){
         document.getElementById("manager_id1").value = id_;
-    }
-    function setManagerID2(id_){
         document.getElementById("manager_id2").value = id_;
     }
     function setContactID(c_id){
         document.getElementById("contact_id").value = c_id;
+        document.getElementById("contact_id1").value = c_id;
     }
 
     function setContractID(id_){
         document.getElementById("contract_id").value = id_;
+        document.getElementById("contract_id1").value = id_;
     }
     function setProperty(property_){
         document.getElementById("property_name").value = property_;

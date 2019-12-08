@@ -51,6 +51,7 @@
                   <th scope="col">Replied</th>
                   <th scope="col">Closed</th>
                   <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -61,14 +62,10 @@
                     <td>{% if contact.replied %} Yes {% else %} No {% endif %}</td>
                     <td>{% if contact.closed %} Yes {% else %} No {% endif %}</td>
                     <td>
-                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View the House</a>
+                        <button class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View the House</button>
                     </td>
                     <td>
-                      <a type="button" class="btn btn-warning" title="Reply:"
-                        data-container="body" data-toggle="popover" data-placement="right"
-                        data-content="{{contact.reply_message}}">
-                          View Reply
-                        </a>
+                        <button class="btn btn-warning" title="{{contact.reply_message}}" size="100px">View Reply</button>
                     </td>
                   </tr>
                 {% endfor %}

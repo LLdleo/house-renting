@@ -32,7 +32,7 @@ def contract_create(request):
 def contract_deny(request):
     if request.method == 'POST':
         message = request.POST['message']
-        contact_id = request.POST['contact_id']
+        contact_id = request.POST['contact_id1']
 
         Contact.objects.filter(id=contact_id).update(replied=True, reply_message=message, closed=True)
 
@@ -69,7 +69,7 @@ def contract(request, contract_id):
 
 def end_contract(request):
     if request.method == 'POST':
-        contract_id = request.POST['contract_id']
+        contract_id = request.POST['contract_id1']
         import datetime
         dt = datetime.datetime.now()
         today = '-'.join([str(dt.year), str(dt.month), str(dt.day)])
