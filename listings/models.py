@@ -28,6 +28,10 @@ class Listing(models.Model):
     is_published = models.BooleanField(default=True)
     list_date = models.DateTimeField(default=datetime.now, blank=True)
     current_occupied = models.IntegerField()
+    energy = models.CharField(max_length=20, default='Free')
+    hot_water = models.CharField(max_length=20, default='Free')
+    heating = models.CharField(max_length=20, default='Free')
+    furnished = models.CharField(max_length=20, default='Well')
 
     def __str__(self):
         return self.title

@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from .choices import price_choices, room_choices, property_type
+from .choices import price_choices, room_choices, property_type, energy_list, hot_water_list, heating_list, furnished_list
 
 from .models import Listing
 from contacts.models import Contact
@@ -65,10 +65,50 @@ def search(request):
         if price:
             queryset_list = queryset_list.filter(price__lte=price)
 
+    # Address
+    if 'address' in request.GET:
+        address = request.GET['address']
+        if address:
+            queryset_list = queryset_list.filter(address__icontains=address)
+
+    # house_type
+    if 'house_type' in request.GET:
+        house_type = request.GET['house_type']
+        if house_type:
+            queryset_list = queryset_list.filter(house_type__exact=house_type)
+
+    # energy
+    if 'energy' in request.GET:
+        energy = request.GET['energy']
+        if energy:
+            queryset_list = queryset_list.filter(energy__exact=energy)
+
+    # hot_water
+    if 'hot_water' in request.GET:
+        hot_water = request.GET['hot_water']
+        if hot_water:
+            queryset_list = queryset_list.filter(hot_water__exact=hot_water)
+
+    # heating
+    if 'heating' in request.GET:
+        heating = request.GET['heating']
+        if heating:
+            queryset_list = queryset_list.filter(heating__exact=heating)
+
+    # furnished
+    if 'furnished' in request.GET:
+        furnished = request.GET['furnished']
+        if furnished:
+            queryset_list = queryset_list.filter(furnished__exact=furnished)
+
     context = {
-        'state_choices': property_type,
+        'property_type': property_type,
         'bedroom_choices': room_choices,
         'price_choices': price_choices,
+        'energy_list': energy_list,
+        'hot_water_list': hot_water_list,
+        'heating_list': heating_list,
+        'furnished_list': furnished_list,
         'listings': queryset_list,
         'values': request.GET
     }

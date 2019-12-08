@@ -103,7 +103,7 @@
                     <td>{{ contact.listing }}</td>
                     <td>{{ contact.name }}</td>
                     <td>
-                      <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#viewModal" name="contact" onclick="setUserID('{{ contact.user_id }}'); setManagerID('{{ contact.manager_id }}'); setContactID({{ contact.id }}); setProperty('{{ contact.listing }}'); setPropertyID('{{ contact.listing_id }}'); setUserName('{{ contact.name }}'); setEmail('{{ contact.email }}'); setPhone('{{contact.phone}}'); setMessage('{{ contact.message }}');">View the Inquiry</button>
+                      <button class="btn btn-dark btn-secondary" data-toggle="modal" data-target="#viewModal" name="contact" onclick="setUserID('{{ contact.user_id }}'); setManagerID2('{{ contact.manager_id }}'); setContactID({{ contact.id }}); setProperty('{{ contact.listing }}'); setPropertyID('{{ contact.listing_id }}'); setUserName('{{ contact.name }}'); setEmail('{{ contact.email }}'); setPhone('{{contact.phone}}'); setMessage('{{ contact.message }}');">View the Inquiry</button>
                     </td>
                     <td>
                       <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View the House </a>
@@ -167,7 +167,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="viewModalLabel">End the Inquiry</h5>
+          <h5 class="modal-title" id="endContractModalLabel">End the Contract</h5>
           <button type="button" class="close" data-dismiss="modal">
             <span>&times;</span>
           </button>
@@ -175,11 +175,7 @@
         <div class="modal-body">
           <form action="{% url 'end_contract' %}" method="POST">
             {% csrf_token %}
-            {% if user.is_authenticated %}
-              <input type="hidden" name="manager_id" id="manager_id">
-            {% else %}
-              <input type="hidden" name="manager_id" value="0">
-            {% endif %}
+            <input type="hidden" name="manager_id1" id="manager_id1">
             <input type="hidden" name="contract_id" id="contract_id">
           <label> Are you sure you want to end this contract?</label>
           <label> (Note: The contract will be ended right away )</label>
@@ -203,11 +199,7 @@
         <div class="modal-body">
           <form action="{% url 'contract_create' %}" method="POST">
             {% csrf_token %}
-            {% if user.is_authenticated %}
-              <input type="hidden" name="manager_id" id="manager_id">
-            {% else %}
-              <input type="hidden" name="manager_id" value="0">
-            {% endif %}
+              <input type="hidden" name="manager_id2" id="manager_id2">
             <input type="hidden" name="the_user_id" id="the_user_id">
             <input type="hidden" name="contact_id" id="contact_id">
             <input type="hidden" name="listing_id" id="listing_id">
@@ -272,8 +264,11 @@
     function setUserID(id_){
         document.getElementById("the_user_id").value = id_;
     }
-    function setManagerID(id_){
-        document.getElementById("manager_id").value = id_;
+    function setManagerID1(id_){
+        document.getElementById("manager_id1").value = id_;
+    }
+    function setManagerID2(id_){
+        document.getElementById("manager_id2").value = id_;
     }
     function setContactID(c_id){
         document.getElementById("contact_id").value = c_id;

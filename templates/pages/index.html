@@ -17,13 +17,13 @@
               <div class="form-row">
                 <div class="col-md-3 mb-3">
                   <label class="sr-only">Keywords</label>
-                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Furnished, Parking..)" style="width: 200px;">
+                  <input type="text" name="keywords" class="form-control" placeholder="Keyword" value="{{ values.keywords }}" style="width: 200px;">
                 </div>
 
                 <div class="col-md-3 mb-3">
                   <label class="sr-only">State</label>
-                  <select name="state" class="form-control" style="width: 200px;">
-                    <option selected="true" disabled="disabled">Properties (All)</option>
+                <select name="property_type" class="form-control" style="width:200px;">
+                  <option selected="selected" disabled="disabled">Property Type</option>
                     {% for key,value in property_type.items %}
                       <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
@@ -33,8 +33,8 @@
 				<div class="col-md-3 mb-3">
                   <label class="sr-only">Rooms</label>
                   <select name="bedrooms" class="form-control" style="width: 200px;">
-                    <option selected="true" disabled="disabled">Rooms (All)</option>
-                    {% for key,value in room_choices.items %}
+                    <option selected="true" disabled="disabled">Total Rooms</option>
+                    {% for key,value in bedroom_choices.items %}
                       <option value="{{ key }}">{{ value }}</option>
                     {% endfor %}
                   </select>
