@@ -46,11 +46,9 @@ def contract_sign(request):
         contract_id = request.POST['contract_id']
 
         listing_id = Contract.objects.filter(id=contract_id).values_list('listing_id').first()[0]
-        # max_capacity = Listing.objects.filter(id=listing_id).values_list('bedrooms').first()[0]
-        mc = Listing.objects.raw('SELECT bedrooms FROM listings_listing WHERE id=%s LIMIT 1') % listing_id
-        max_capacity = int(mc[0])
+        max_capacity = Listing.objects.filter(id=listing_id).values_list('bedrooms').first()[0]
         print('max_capacity', max_capacity)
-        current_occupied = Contract.objects.filter(id=listing_id, valid=True).count()
+        current_occupied = Contract.objects.filter(listing_id=listing_id, valid=True).count()
         print('current_occupied', current_occupied)
         if current_occupied < max_capacity:
             Listing.objects.filter(id=listing_id).update(current_occupied=current_occupied+1)
