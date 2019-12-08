@@ -35,19 +35,78 @@
                   <select name="bedrooms" class="form-control" style="width: 200px;">
                     <option selected="true" disabled="disabled">Total Rooms</option>
                     {% for key,value in bedroom_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
+                      <option value="{{ key }}"
+                      {% if key == values.bedrooms %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
                     {% endfor %}
                   </select>
                 </div>
 				
 				<div class="col-md-3 mb-3">
                   <select name="price" class="form-control" id="type" style="width: 200px;">
-                    <option selected="true" disabled="disabled">Max Price (Any)</option>
+                    <option selected="true" disabled="disabled">Max Price</option>
                     {% for key,value in price_choices.items %}
-                      <option value="{{ key }}">{{ value }}</option>
+                      <option value="{{ key }}"
+                      {% if key == values.price %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
                     {% endfor %}
                   </select>
                 </div>
+
+            <div class="col-md-3 mb-3">
+                <select name="energy" class="form-control" style="width:200px;">
+                  <option selected="true" disabled="disabled">Energy</option>
+                  {% for key,value in energy_list.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.energy %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <select name="hot_water" class="form-control" style="width:200px;">
+                  <option selected="true" disabled="disabled">Hot Water</option>
+                  {% for key,value in hot_water_list.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.hot_water %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+                <div class="col-md-3 mb-3">
+                <select name="heating" class="form-control" style="width:200px;">
+                  <option selected="true" disabled="disabled">Heating</option>
+                  {% for key,value in heating_list.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.heating %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3 mb-3">
+                <select name="furnished" class="form-control" style="width:200px;">
+                  <option selected="true" disabled="disabled">Furnished</option>
+                  {% for key,value in furnished_list.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.furnished %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
               </div>
 			  
               <button class="btn btn-secondary btn-block mt-4" type="submit" style="width: 200px; margin:auto;">Search</button>
