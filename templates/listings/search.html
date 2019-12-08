@@ -22,7 +22,7 @@
                 <label class="sr-only">State</label>
                 <select name="property_type" class="form-control" style="width:200px;">
                   <option selected="selected" disabled="disabled">Property Type</option>
-                  {% for key,value in property_type.items %}
+                  {% for key,value in property_types.items %}
                       <option value="{{ key }}"
                       {% if key == values.property_type %}
                         selected

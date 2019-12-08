@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from listings.choices import price_choices, room_choices, property_type
+from listings.choices import price_choices, room_choices, property_types
 
 from listings.models import Listing
 from managers.models import Manager
@@ -11,7 +11,7 @@ def index(request):
 
     context = {
         'listings': listings,
-        'property_type': property_type,
+        'property_type': property_types,
         'room_choices': room_choices,
         'price_choices': price_choices
     }

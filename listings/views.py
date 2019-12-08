@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from .choices import price_choices, room_choices, property_type, energy_list, hot_water_list, heating_list, furnished_list
+from .choices import price_choices, room_choices, property_types, energy_list, hot_water_list, heating_list, furnished_list
 
 from .models import Listing
 from contacts.models import Contact
@@ -72,8 +72,8 @@ def search(request):
             queryset_list = queryset_list.filter(address__icontains=address)
 
     # house_type
-    if 'house_type' in request.GET:
-        house_type = request.GET['house_type']
+    if 'property_type' in request.GET:
+        house_type = request.GET['property_type']
         if house_type:
             queryset_list = queryset_list.filter(house_type__exact=house_type)
 
@@ -102,7 +102,7 @@ def search(request):
             queryset_list = queryset_list.filter(furnished__exact=furnished)
 
     context = {
-        'property_type': property_type,
+        'property_types': property_types,
         'bedroom_choices': room_choices,
         'price_choices': price_choices,
         'energy_list': energy_list,

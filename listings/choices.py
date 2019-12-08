@@ -11,7 +11,7 @@ price_choices = {
     '650': '$650',
 }
 
-property_type = {
+property_types = {
     'House': 'House',
     'Apartment': 'Apartment',
     'Large Single': 'Large Single',
