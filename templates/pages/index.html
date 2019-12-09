@@ -177,7 +177,6 @@
                     <div class="col-6">
                       <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
                   </div>
-{#                Todo#}
                     <div class="row py-2 text-secondary">
                     <div class="col-6">
                       <i class="fas fa-book-open"></i> Status: {% if listing.current_occupied < listing.bedrooms %} Available {% else %} Full {% endif %}</div>
@@ -205,26 +204,78 @@
     </div>
   </section>
 
-  <section id="services" class="py-5 bg-secondary text-black">
+{#  <section id="services" class="py-5 bg-secondary text-black">#}
+{#    <div class="container">#}
+{#      <div class="row text-center">#}
+{#        <div class="col-md-4">#}
+{#          <i class="fas fa-comment fa-4x mr-4"></i>#}
+{#          <hr>#}
+{#          <h3>Consulting Services</h3>#}
+{#          <p>You can contact with the manager via e-mail.</p>#}
+{#        </div>#}
+{#        <div class="col-md-4">#}
+{#          <i class="fas fa-home fa-4x mr-4"></i>#}
+{#          <hr>#}
+{#          <h3>Property Management</h3>#}
+{#          <p>We have a great management team to maintain our property.</p>#}
+{#        </div>#}
+{#        <div class="col-md-4">#}
+{#          <i class="fas fa-suitcase fa-4x mr-4"></i>#}
+{#          <hr>#}
+{#          <h3>Renting</h3>#}
+{#          <p>We only provide renting for students in WPI.</p>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+{#  </section>#}
+    <section class="py-5 text-black">
     <div class="container">
       <div class="row text-center">
+
         <div class="col-md-4">
-          <i class="fas fa-comment fa-4x mr-4"></i>
-          <hr>
-          <h3>Consulting Services</h3>
-          <p>You can contact with the manager via e-mail.</p>
+          <div id="footer-social-links" style="text-align:left; margin-top:20px;">
+          <address class="footer-address">
+              <a href="https://www.wpi.edu"><b>WORCESTER POLYTECHNIC INSTITUTE</b></a><br>
+              100 Institute Road<br>
+              Worcester, MA | 01609-2280<br>
+              Ph: <a href="tel:508-831-5000">508-831-5000</a>
+          </address>
+          <nav class="contact-us" aria-label="List of links to connecting with WPI">
+            <a href="https://www.wpi.edu/contact?url=https%3A//www.wpi.edu/%253Cfront%253E" title="Contact WPI Footer Link">Contact Us</a>
+            <span class="contact-us-separator"> | </span>
+            <a href="https://www.wpi.edu/coming-to-campus" title="Coming to Campus Footer Link"> Coming to Campus</a>
+            <div class="emergency-accessibility">
+              <a href="https://www.wpi.edu/about/emergency-management" title="Emergency Management Footer Link" class="emergency-management-footer-link">Emergency Management</a>
+              <span class="contact-us-separator"> | </span>
+              <a href="https://www.wpi.edu/academics/faculty/disability-services/accessibility-guidelines-resources" title="Accessibility Guidelines &amp; Resources Footer Link" class="accessibility-footer-link">Accessibility</a>
+            </div>
+          </nav><div style="margin-top:20px;">
+             <a href="https://twitter.com/WPI" target="_blank" title="Link to Twitter WPI Feed" style="margin-right:10px;">
+ <img src="../static/img/twitter.png" style="width:8%; height:8%;"></a>
+              <a href="https://www.instagram.com/wpi" target="_blank" title="Link to Instagram WPI" style="margin-right:10px;">
+ <img src="../static/img/inst.png" style="width:8%; height:8%;"></a>
+              <a href="https://www.facebook.com/wpi.edu" target="_blank" title="Link to Facebook WPI Page" style="margin-right:10px;">
+ <img src="../static/img/fb.png" style="width:8%; height:8%;"></a>
+              <a href="https://www.youtube.com/user/WPI" target="_blank" title="Link to Youtube WPI channel" style="margin-right:10px;">
+ <img src="../static/img/youtube.png" style="width:8%; height:8%;"></a>
+  </div>
         </div>
-        <div class="col-md-4">
-          <i class="fas fa-home fa-4x mr-4"></i>
-          <hr>
-          <h3>Property Management</h3>
-          <p>We have a great management team to maintain our property.</p>
         </div>
+
         <div class="col-md-4">
-          <i class="fas fa-suitcase fa-4x mr-4"></i>
+
+{#      <span class="glyphicon glyphicon-calendar"></span>#}
+
+{#<i class="fa fa-calendar" style="font-size:100px;color:red"></i>#}
+          <img src="../static/img/events.png" style="width:35%; height:50%; margin-top:10px;">
           <hr>
-          <h3>Renting</h3>
-          <p>We only provide renting for students in WPI.</p>
+          <h3>Upcoming Events</h3>
+          <p>Check back soon for upcoming events.</p>
+        </div>
+
+        <div class="col-md-4">
+          <img src = "../static/img/global-projects.svg">
+          <p><a href="https://www.wpi.edu/project-based-learning/global-project-program">WPI around the World.</a></p>
         </div>
       </div>
     </div>
