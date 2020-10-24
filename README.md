@@ -6,13 +6,11 @@ A web application using Django, HTML5/CSS/JS, and MySQL, enables students to sea
 ```shell script
 pip install django mysqlclient pymysql pillow
 ```
----
-### DB setting
+### DB setting  
 go to `wpi_house/`  
-change `db.json`
----
+change `db.json`  
 ### Before Launching the Application
-run migrate:  
+do databse migration:  
 ```shell script
 python manage.py migrate
 ```
